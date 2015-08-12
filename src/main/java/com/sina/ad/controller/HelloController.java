@@ -22,6 +22,11 @@ public class HelloController {
 	@ResponseBody
 	@RequestMapping("/hello")
 	public ResponseJson hello() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		serviceA.method1();
 		ResponseJson response = new ResponseJson();
 		response.setStatus(StatusCode.OPERATE_SUCCESS);
@@ -33,6 +38,11 @@ public class HelloController {
 	@ResponseBody
 	@RequestMapping("/happy")
 	public ResponseJson happy() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		serviceA.method2();
 		ResponseJson response = new ResponseJson();
 		response.setStatus(StatusCode.OPERATE_SUCCESS);

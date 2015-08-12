@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 public class ServiceB {
 	
 	public void method1() {
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println("ServiceB-Method1 called.");
 	}
 	

@@ -10,6 +10,11 @@ public class ServiceA {
 	ServiceB serviceB;
 	
 	public void method1() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		System.out.println("ServiceA-Method1 called.");
 //		method2();
 		serviceB.method1();

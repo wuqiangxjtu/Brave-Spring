@@ -8,13 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.github.kristofa.brave.SpanCollector;
-import com.github.kristofa.brave.zipkin.ZipkinSpanCollector;
 import com.twitter.zipkin.gen.zipkinCoreConstants;
 
 public class MonitorHandlerInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
 	SpanCollector spanCollector;
+	
+	@Autowired
+	TraceFilters traceFilters;
 
 	@Override
 	public void afterCompletion(HttpServletRequest request,
@@ -41,9 +43,10 @@ public class MonitorHandlerInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		Brave.beginTrace(request, spanCollector);
+		Brave.beginTrace(request, spanCollector,traceFilters);
 		Brave.newSpan(request);
 		Brave.submitAnnotation(zipkinCoreConstants.SERVER_RECV);
+		Thread.sleep(1000);
 		return super.preHandle(request, response, handler);
 	}
 

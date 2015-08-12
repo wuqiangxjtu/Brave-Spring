@@ -1,10 +1,13 @@
 package com.sina.ad.brave;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
 
 import com.github.kristofa.brave.SpanCollector;
+import com.github.kristofa.brave.TraceFilter;
 
 @Component
 public class Brave {
@@ -16,13 +19,13 @@ public class Brave {
 	 * @param request
 	 * @param spanCollector
 	 */
-	public static void beginTrace(final HttpServletRequest request, final SpanCollector spanCollector) {
-		beginTrace(request.getLocalAddr(), request.getLocalPort(), getServiceName(request), spanCollector);
+	public static void beginTrace(final HttpServletRequest request, final SpanCollector spanCollector, final TraceFilters traceFilters) {
+		beginTrace(request.getLocalAddr(), request.getLocalPort(), getServiceName(request), spanCollector, traceFilters);
 	}
 	
-	public static void beginTrace(String ip, int port, String serviceName,SpanCollector spanCollector) {
+	public static void beginTrace(String ip, int port, String serviceName,SpanCollector spanCollector, final TraceFilters traceFilters) {
 		Brave.TRACER.set(new Tracer(new ThreadState(ip,
-				port, serviceName), spanCollector));
+				port, serviceName), spanCollector,traceFilters));
 	}
 	
 	/**
