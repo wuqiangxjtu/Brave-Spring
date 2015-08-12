@@ -17,7 +17,7 @@ public class TraceFiltersConfiguration {
     @Scope(value = "singleton")
     public TraceFilters traceFilters() {
         // Sample rate = 1 means every request will get traced.
-        return new TraceFilters(Arrays.<TraceFilter>asList(new FixedSampleRateTraceFilter(2)));
+        return new TraceFilters(Arrays.<TraceFilter>asList(new FixedSampleRateTraceFilter(1)));
     }
 
 }

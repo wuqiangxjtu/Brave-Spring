@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 import com.sina.ad.brave.Brave;
+import com.sina.ad.brave.BraveConstants;
 import com.twitter.zipkin.gen.zipkinCoreConstants;
 
 @Component
@@ -25,12 +26,14 @@ public class LogAspect {
 //		System.out.println(joinPoint.getSignature() + "--- before advice ---");
 		Brave.newSpan(joinPoint.getSignature().toString());
 		Brave.submitAnnotation(zipkinCoreConstants.SERVER_RECV);
+//		Brave.submitAnnotation(BraveConstants.METHOD_CALL);
 	}
 	
 	@After("pointCut()")
 	public void after(JoinPoint joinPoint) {
 //		System.out.println(joinPoint.getSignature() + "--- after advice ---");
 		Brave.submitAnnotation(zipkinCoreConstants.SERVER_SEND);
+//		Brave.submitAnnotation(BraveConstants.METHOD_RETURN);
 		Brave.collect();
 	}
 	

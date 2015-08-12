@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import com.github.kristofa.brave.LoggingSpanCollector;
 import com.github.kristofa.brave.SpanCollector;
 import com.github.kristofa.brave.zipkin.ZipkinSpanCollector;
+import com.sina.ad.brave.MixSpanCollector;
 
 
 
@@ -25,7 +26,8 @@ public class SpanCollectorConfiguration {
     public SpanCollector spanCollector() {
 
         // For development purposes we use the logging span collector.
-        return new LoggingSpanCollector();
+//        return new LoggingSpanCollector();
 //    	return new ZipkinSpanCollector("localhost", 9410); 
+    	return new MixSpanCollector("localhost", 9410);
     }
 }

@@ -1,15 +1,10 @@
 package com.sina.ad.brave;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Component;
-
 import com.github.kristofa.brave.SpanCollector;
-import com.github.kristofa.brave.TraceFilter;
 
-@Component
+
 public class Brave {
 
 	public static ThreadLocal<Tracer> TRACER = new ThreadLocal<Tracer>();
